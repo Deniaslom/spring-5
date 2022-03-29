@@ -1,0 +1,47 @@
+configurations.implementation.canBeResolved = true
+buildscript {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		maven { url "http://repo.spring.io/release"
+			allowInsecureProtocol = true}
+		maven { url "http://repo.spring.io/snapshot"
+			allowInsecureProtocol = true}
+		maven { url "https://repo.spring.io/libs-snapshot"
+			allowInsecureProtocol = true}
+		maven { url "http://repo.spring.io/milestone"
+			allowInsecureProtocol = true}
+		maven { url "https://repo.spring.io/libs-milestone"
+			allowInsecureProtocol = true}
+		maven { url "https://maven.eveoh.nl/content/repositories/releases"
+			allowInsecureProtocol = true}
+		maven { url "https://maven.eveoh.nl/content/repositories/releases"
+			allowInsecureProtocol = true}
+	}
+
+	dependencies {
+		classpath "nl.eveoh:gradle-aspectj:2.0"
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+project.ext {
+	aspectjVersion = '1.9.3'
+}
+
+apply plugin: 'aspectj'
+
+
+ jar {
+	manifest {
+		attributes(
+				"Created-By": "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class": "com.apress.prospring5.ch5.AspectJDemo",
+				"Class-Path": configurations.implementation.collect { it.getName() }.join(' ')
+		)
+	}
+}

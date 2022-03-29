@@ -1,0 +1,16 @@
+
+dependencies {
+	implementation spring.aspects, spring.data, misc.guava
+}
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class"         : "com.apress.prospring5.ch8.SpringAuditJPADemo",
+				"Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}

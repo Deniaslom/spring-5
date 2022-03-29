@@ -1,0 +1,15 @@
+dependencies {
+	implementation project(':chapter09:base-dao')
+}
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class"         : "com.apress.prospring5.ch9.TxProgrammaticDemo",
+				"Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}

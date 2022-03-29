@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/release"
+            allowInsecureProtocol = true}
+        maven { url "http://repo.spring.io/snapshot"
+            allowInsecureProtocol = true}
+        maven { url "https://repo.spring.io/libs-snapshot"
+            allowInsecureProtocol = true}
+        maven { url "http://repo.spring.io/milestone"
+            allowInsecureProtocol = true}
+        maven { url "https://repo.spring.io/libs-milestone"
+            allowInsecureProtocol = true}
+    }
+
+    dependencies {
+        classpath boot.springBootPlugin
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    implementation project(':chapter06:plain-jdbc')
+    implementation boot.starterJdbc, db.h2
+}
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+    manifest {
+        attributes("Created-By"      : "Iuliana Cosmina",
+                "Specification-Title": "Pro Spring 5",
+                "Main-Class"         : "com.apress.prospring5.ch6.Application",
+                "Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+    }
+}

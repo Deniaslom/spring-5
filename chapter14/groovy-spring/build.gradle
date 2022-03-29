@@ -1,0 +1,41 @@
+apply plugin: 'groovy'
+
+dependencies{
+	implementation spring.context, misc.groovy, misc.joda
+}
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class"         : "com.apress.prospring5.ch14.RuleEngineDemo",
+				"Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}
+
+sourceSets {
+	main {
+		// no source dirs for the java compiler
+		java { srcDirs = [] }
+		// implementation   everything in src/ with groovy
+		groovy { srcDirs = ["src/main/java", "src/main/groovy", "rules"] }  // (*)
+	}
+}
+
+/*
+task copyRuleFile(type: Copy) {
+	description 'Copies the configurations files rules/RuleFactoryImpl.groovy into target.'
+	from "rules"
+	into "$buildDir/target/rules"
+
+}
+compileJava.dependsOn copyRuleFile
+*/
+
+task ruleExec(type:JavaExec) {
+	main = 'com.apress.prospring5.ch14.RuleEngineDemo'
+	classpath sourceSets.main.runtimeClasspath
+}

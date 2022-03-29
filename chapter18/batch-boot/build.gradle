@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/release"
+            allowInsecureProtocol = true}
+        maven { url "http://repo.spring.io/snapshot"
+            allowInsecureProtocol = true}
+        maven { url "https://repo.spring.io/libs-snapshot"
+            allowInsecureProtocol = true}
+        maven { url "http://repo.spring.io/milestone"
+            allowInsecureProtocol = true}
+        maven { url "https://repo.spring.io/libs-milestone"
+            allowInsecureProtocol = true}
+    }
+
+    dependencies {
+        classpath boot.springBootPlugin
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    implementation boot.starterBatch, db.hsqldb
+    testImplementation testing.junit
+}

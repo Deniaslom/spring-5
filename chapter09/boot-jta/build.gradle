@@ -1,0 +1,41 @@
+buildscript {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		maven { url "http://repo.spring.io/release"
+			allowInsecureProtocol = true}
+		maven { url "http://repo.spring.io/snapshot"
+			allowInsecureProtocol = true}
+		maven { url "https://repo.spring.io/libs-snapshot"
+			allowInsecureProtocol = true}
+		maven { url "http://repo.spring.io/milestone"
+			allowInsecureProtocol = true}
+		maven { url "https://repo.spring.io/libs-milestone"
+			allowInsecureProtocol = true}
+	}
+
+	dependencies {
+		classpath boot.springBootPlugin
+	}
+}
+
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+	implementation boot.starterJpa, boot.starterJta, boot.starterJms, db.h2
+	implementation(misc.artemis) {
+		exclude group: 'org.apache.geronimo.specs', module: 'geronimo-jms_2.0_spec'
+	}
+}
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes("Created-By": "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class"         : "com.apress.prospring5.ch9.Application",
+				"Class-Path": configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}

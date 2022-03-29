@@ -1,0 +1,19 @@
+apply plugin: 'idea'
+
+dependencies {
+	annotationProcessor hibernate.jpaModelGen
+	implementation hibernate.querydslapt
+}
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes(
+				"Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				'Main-Class': 'com.apress.prospring5.ch8.SpringJPADemo',
+				"Class-Path": configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}

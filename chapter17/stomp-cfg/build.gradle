@@ -1,0 +1,13 @@
+apply plugin: 'war'
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ war{
+    archiveName = 'stomp2.war'
+    manifest {
+        attributes("Created-By"      : "Iuliana Cosmina",
+                "Specification-Title": "Pro Spring 5",
+                "Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+    }
+}

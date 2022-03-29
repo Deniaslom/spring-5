@@ -1,0 +1,17 @@
+dependencies {
+	implementation db.mysql
+	implementation (hibernate.tx) {
+		exclude group: 'org.hibernate', module: 'hibernate'
+	}
+}
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}

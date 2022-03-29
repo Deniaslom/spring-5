@@ -1,0 +1,18 @@
+configurations.implementation.canBeResolved = true
+dependencies {
+	implementation project(':chapter02:hello-world')
+	implementation spring.context, misc.slf4jJcl, misc.logback
+	testImplementation testing.junit
+}
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class"         : "com.apress.prospring5.ch3.DeclareSpringComponents",
+				"Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}

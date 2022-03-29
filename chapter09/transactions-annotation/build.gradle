@@ -1,0 +1,19 @@
+dependencies {
+	implementation project(':chapter09:base-dao')
+	implementation (hibernate.tx) {
+		exclude group: 'org.hibernate', module: 'hibernate'
+	}
+
+}
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class"         : "com.apress.prospring5.ch9.TxAnnotationDemo",
+				"Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}

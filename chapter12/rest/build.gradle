@@ -1,0 +1,21 @@
+apply plugin: 'war'
+
+dependencies {
+	implementation project(':chapter12:base-remote')
+	implementation spring.oxm, spring.webmvc, web.servlet, misc.castor, misc.jacksonDatabind, web.httpclient
+	testImplementation spring.test
+}
+
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ war{
+	archiveName = 'rest.war'
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}
+

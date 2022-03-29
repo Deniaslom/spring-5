@@ -1,0 +1,14 @@
+dependencies {
+    implementation spring.data, db.h2
+}
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+    manifest {
+        attributes("Created-By"      : "Iuliana Cosmina",
+                "Specification-Title": "Pro Spring 5",
+                "Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+    }
+}

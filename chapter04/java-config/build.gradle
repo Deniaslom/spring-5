@@ -1,0 +1,18 @@
+dependencies {
+	implementation project(':chapter03:constructor-injection')
+	testImplementation testing.junit
+}
+
+configurations.implementation.canBeResolved = true
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class"         : "com.apress.prospring5.ch4.JavaConfigSimpleDemo",
+				"Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}

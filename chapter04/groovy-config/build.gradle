@@ -1,0 +1,19 @@
+apply plugin: 'groovy'
+configurations.implementation.canBeResolved = true
+
+dependencies {
+	implementation misc.groovy
+	implementation project(':chapter03:bean-inheritance')
+}
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class"         : "com.apress.prospring5.ch4.GroovyConfig",
+				"Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}

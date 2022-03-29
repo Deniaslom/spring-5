@@ -1,0 +1,21 @@
+dependencies {
+	implementation project(':chapter02:hello-world')
+	implementation project(':chapter05:aop-hello-world')
+}
+
+configurations.implementation.canBeResolved = true 
+ 
+ 
+ configurations.implementation.canBeResolved = true 
+ 
+ 
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class"         : "com.apress.prospring5.ch5.RegexpPointcutDemo",
+				"Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}

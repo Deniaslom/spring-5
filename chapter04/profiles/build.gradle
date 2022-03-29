@@ -1,0 +1,17 @@
+dependencies {
+	testImplementation spring.test, testing.junit
+}
+
+configurations.implementation.canBeResolved = true
+
+
+ configurations.implementation.canBeResolved = true 
+ 
+ jar {
+	manifest {
+		attributes("Created-By"      : "Iuliana Cosmina",
+				"Specification-Title": "Pro Spring 5",
+				"Main-Class"         : "com.apress.prospring5.ch4.ProfileXmlConfigDemo",
+				"Class-Path"         : configurations.implementation.collect { it.getName() }.join(' '))
+	}
+}
